@@ -1,12 +1,12 @@
 package com.br.medsbackend.entity;
 
+import com.br.medsbackend.dto.doctor.DoctorRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -26,9 +26,6 @@ public class DoctorEntity {
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     @Column(name = "pacientes")
     private Set<PatientEntity> patients;
-
-    @Column(name = "id_usuario_interno")
-    private Long internalUserId;
 
     @Column(name = "documento", nullable = false)
     private String document;
@@ -54,4 +51,17 @@ public class DoctorEntity {
 
     @Column(name = "telefone", nullable = false)
     private String phone;
+
+    public static DoctorEntity fromRequest(DoctorRequestDto request) {
+        return DoctorEntity.builder()
+                .document(request.document())
+                .name(request.name())
+                .surname(request.surname())
+                .birthDate(request.birthDate())
+                .crm(request.crm())
+                .crmState(request.crmState())
+                .specialty(request.specialty())
+                .phone(request.phone())
+                .build();
+    }
 }
