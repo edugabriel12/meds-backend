@@ -1,5 +1,6 @@
 package com.br.medsbackend.entity;
 
+import com.br.medsbackend.dto.patient.PatientRequestDto;
 import com.br.medsbackend.enumeration.Gender;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,12 +22,6 @@ public class PatientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-
-    @Column(name = "senha", nullable = false, unique = true)
-    private String password;
 
     @Column(name = "nome", nullable = false)
     private String name;
@@ -63,5 +58,20 @@ public class PatientEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_medico", nullable = false, referencedColumnName = "id")
+    @Transient
     private DoctorEntity doctor;
+
+    public static PatientEntity fromRequest(PatientRequestDto request) {
+        return PatientEntity.builder()
+                .name(request.name())
+                .surname(request.surname())
+                .gender(request.gender())
+                .birthDate(request.birthDate())
+                .susCardNumber(request.susCardNumber())
+                .phone(request.phone())
+                .emergencyPhone(request.emergencyPhone())
+                .weight(request.weight())
+                .height(request.height())
+                .build();
+    }
 }

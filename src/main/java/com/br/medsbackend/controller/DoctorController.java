@@ -24,7 +24,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{document}")
-    public ResponseEntity<GetDoctorDto> getDoctor(@PathVariable(name = "document") String document) {
+    public ResponseEntity<GetDoctorDto> getDoctorByDocument(@PathVariable(name = "document") String document) {
         DoctorEntity doctor = service.findDoctorByDocument(document);
 
         return ResponseEntity.ok(GetDoctorDto.fromEntity(doctor));

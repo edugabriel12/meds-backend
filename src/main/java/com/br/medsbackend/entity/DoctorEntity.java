@@ -23,8 +23,15 @@ public class DoctorEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name = "senha", nullable = false, unique = true)
+    private String password;
+
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
     @Column(name = "pacientes")
+    @Transient
     private Set<PatientEntity> patients;
 
     @Column(name = "documento", nullable = false)
