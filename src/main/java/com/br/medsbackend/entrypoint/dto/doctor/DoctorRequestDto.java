@@ -1,6 +1,6 @@
 package com.br.medsbackend.entrypoint.dto.doctor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public record DoctorRequestDto (
         String email,
@@ -8,7 +8,7 @@ public record DoctorRequestDto (
         String document,
         String name,
         String surname,
-        LocalDateTime birthDate,
+        Date birthDate,
         String crm,
         String crmState,
         String specialty,

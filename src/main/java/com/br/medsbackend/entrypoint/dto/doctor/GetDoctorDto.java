@@ -3,12 +3,13 @@ package com.br.medsbackend.entrypoint.dto.doctor;
 import com.br.medsbackend.dataprovider.entity.DoctorEntity;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public record GetDoctorDto(
         String document,
         String name,
         String surname,
-        LocalDateTime birthDate,
+        Date birthDate,
         String crm,
         String crmState,
         String specialty,

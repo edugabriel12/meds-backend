@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
@@ -45,7 +45,7 @@ public class DoctorEntity {
 
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime birthDate;
+    private Date birthDate;
 
     @Column(name = "crm", nullable = false)
     private String crm;

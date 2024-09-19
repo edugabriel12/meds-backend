@@ -1,7 +1,7 @@
 package com.br.medsbackend.dataprovider.entity;
 
-import com.br.medsbackend.entrypoint.dto.patient.PatientRequestDto;
 import com.br.medsbackend.core.enumeration.Gender;
+import com.br.medsbackend.entrypoint.dto.medicalrecord.MedicalRecordRequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -33,7 +33,7 @@ public class PatientEntity {
 
     @Column(name = "data_nascimento", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime birthDate;
+    private Date birthDate;
 
     @ManyToOne
     @JoinColumn(name = "id_medico", nullable = false, referencedColumnName = "id")
@@ -41,10 +41,10 @@ public class PatientEntity {
     @JsonIgnore
     private DoctorEntity doctor;
 
-    public static PatientEntity fromRequest(PatientRequestDto request, DoctorEntity doctor) {
+    public static PatientEntity fromRequest(MedicalRecordRequestDto request, DoctorEntity doctor) {
         return PatientEntity.builder()
-                .fullName(request.fullName())
-                .gender(request.gender())
+                .fullName(request.patientName() + " " + request.patientSurname())
+                .gender(request.patientGender())
                 .birthDate(request.birthDate())
                 .doctor(doctor)
                 .build();
